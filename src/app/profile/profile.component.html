@@ -1,0 +1,16 @@
+<div class="d-flex flex-column align-items-center">
+  <p class="h4 mt-5">Hello {{ name }}</p>
+  <div class="">
+    <div class="d-flex justify-content-center">
+      <app-create-account></app-create-account>
+      <app-create-cource></app-create-cource>
+      <button color="primary" (click)="onClick()" mat-raised-button>
+        View Registered Students
+      </button>
+    </div>
+    <app-view-reg-students *ngIf="show_reg_students"></app-view-reg-students>
+  </div>
+  <p class="h5 mt-4">Your Cources</p>
+
+  <app-cource-lst class="mt-5"></app-cource-lst>
+</div>

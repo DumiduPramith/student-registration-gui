@@ -1,0 +1,21 @@
+<form class="d-flex flex-column">
+  <mat-form-field appearance="fill">
+    <mat-label>role</mat-label>
+    <mat-select [(ngModel)]="selectedValue" name="role">
+      <mat-option *ngFor="let role of roles" [value]="role.value">
+        {{ role.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>username</mat-label>
+    <input type="text" matInput placeholder="Ex. John" />
+    <mat-error>Enter Username</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>password</mat-label>
+    <input type="text" matInput placeholder="Ex. pat@example.com" />
+    <mat-error>Enter password</mat-error>
+  </mat-form-field>
+  <!-- <button mat-raised-button color="primary">LOGIN</button> -->
+</form>

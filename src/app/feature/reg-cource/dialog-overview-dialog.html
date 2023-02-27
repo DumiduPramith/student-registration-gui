@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Available Cources</h1>
+<div mat-dialog-content>
+  <app-checkbox-cources></app-checkbox-cources>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Close</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>
+    Save
+  </button>
+</div>
