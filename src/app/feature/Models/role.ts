@@ -4,8 +4,8 @@ export interface Role {
 }
 
 export const roles: Role[] = [
-  { value: 'student', viewValue: 'Student' },
-  { value: 'academic', viewValue: 'Academic' },
-  { value: 'management', viewValue: 'Management' },
-  { value: 'admin', viewValue: 'Admin' },
+  { value: '1', viewValue: 'Student' },
+  { value: '2', viewValue: 'Academic' },
+  { value: '3', viewValue: 'Management' },
+  { value: '4', viewValue: 'Admin' },
 ];
