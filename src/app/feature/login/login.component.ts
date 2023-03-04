@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Role, roles } from '../Models/role';
 import { LoginService } from '../services/login.service';
@@ -15,12 +16,20 @@ export class LoginComponent {
   constructor(
     private loginService: LoginService,
     private router: Router,
-    private loginEvent: LoginEventService
+    private loginEvent: LoginEventService,
+    private _snackBar: MatSnackBar
   ) {}
   role = '';
   username = '';
   password = '';
   roles: Role[] = roles;
+
+  openSnackBar(msg: string, cls = 'cls') {
+    this._snackBar.open(msg, 'Close', {
+      duration: 4000,
+      panelClass: [cls],
+    });
+  }
 
   onClick() {
     const data = {
@@ -44,6 +53,7 @@ export class LoginComponent {
           }
         },
         error: (err) => {
+          this.openSnackBar('Invalid username or password');
           console.error('Error occurred:', err);
         },
         complete: () => {},
