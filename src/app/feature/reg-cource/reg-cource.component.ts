@@ -1,9 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import {
-  MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SaveEventService } from './save-event.service';
 
 export interface DialogData {
   animal: string;
@@ -17,16 +14,12 @@ export interface DialogData {
 })
 export class RegCourceComponent {
   constructor(public dialog: MatDialog) {}
-  animal: string = '';
-  name: string = '';
+
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      data: { name: this.name, animal: this.animal },
-    });
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog);
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-      this.animal = result;
     });
   }
 }
@@ -38,10 +31,15 @@ export class RegCourceComponent {
 export class DialogOverviewExampleDialog {
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    private saveEvent: SaveEventService
   ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  onSave() {
+    this.saveEvent.sendSaveEvent();
+    this.onNoClick();
   }
 }

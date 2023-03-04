@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 import { CreateSignalService } from '../create-account/create-signal.service';
 import { Role, roles } from '../Models/role';
 import { RegisterService } from '../services/register.service';
@@ -15,14 +17,33 @@ export class CreateAccountFormComponent {
   email = '';
 
   roles: Role[] = roles;
+  //@ts-ignore
+  subscription1: Subscription;
+  //@ts-ignore
+  subscription2: Subscription;
   constructor(
     private createSignalService: CreateSignalService,
-    private registerService: RegisterService
+    private registerService: RegisterService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
-    this.createSignalService.strategySelectEvent.subscribe((data) => {
-      this.submitFormData();
+    this.subscription1 = this.createSignalService.strategySelectEvent.subscribe(
+      (data) => {
+        this.submitFormData();
+      }
+    );
+    console.log('initilize form');
+  }
+
+  ngOnDestroy() {
+    this.subscription1.unsubscribe();
+  }
+
+  openSnackBar(msg: string, cls = 'cls') {
+    this._snackBar.open(msg, 'Close', {
+      duration: 4000,
+      panelClass: [cls],
     });
   }
 
@@ -33,6 +54,26 @@ export class CreateAccountFormComponent {
       email: this.email,
       password: this.password,
     };
-    this.registerService.sendData(data);
+    const sub = this.registerService.sendData(data);
+
+    this.subscription2 = sub.subscribe({
+      next: (response) => {
+        console.log('Response received:', response);
+      },
+      error: (err) => {
+        this.subscription2.unsubscribe();
+        if (err.status === 409) {
+          this.openSnackBar('Account Already exist', 'text-danger');
+        } else {
+          this.openSnackBar('Error Occured', 'text-danger');
+        }
+        console.error('Error occurred:', err);
+      },
+      complete: () => {
+        this.subscription2.unsubscribe();
+        this.openSnackBar('Accout Created Successfully');
+        console.log('completed');
+      },
+    });
   }
 }

@@ -1,15 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import {
-  MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CreateSignalService } from './create-signal.service';
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
 
 @Component({
   selector: 'app-create-account',
@@ -18,16 +9,12 @@ export interface DialogData {
 })
 export class CreateAccountComponent {
   constructor(public dialog: MatDialog) {}
-  animal: string = '';
-  name: string = '';
+
   openDialog(): void {
-    const dialogRef = this.dialog.open(CreateAccountDialogComponent, {
-      data: { name: this.name, animal: this.animal },
-    });
+    const dialogRef = this.dialog.open(CreateAccountDialogComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-      this.animal = result;
     });
   }
 }
@@ -39,7 +26,6 @@ export class CreateAccountComponent {
 export class CreateAccountDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<CreateAccountDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private createSignalSevice: CreateSignalService
   ) {}
 
@@ -49,5 +35,6 @@ export class CreateAccountDialogComponent {
 
   onCreate() {
     this.createSignalSevice.SendCreateSignal();
+    this.onNoClick();
   }
 }

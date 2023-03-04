@@ -1,4 +1,9 @@
-<section class="example-section" [formGroup]="toppings">
-  <p><mat-checkbox formControlName="pepperoni">Pepperoni</mat-checkbox></p>
-  <p><mat-checkbox formControlName="extracheese">Extra Cheese</mat-checkbox></p>
+<section class="example-section">
+  <p *ngFor="let option of courses">
+    <mat-checkbox
+      [(ngModel)]="option.checked"
+      (change)="onChange($event, option.course_id)"
+      >{{ option.course_code }}</mat-checkbox
+    >
+  </p>
 </section>

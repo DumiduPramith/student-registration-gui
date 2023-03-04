@@ -6,10 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
-  name = 'john';
+  name = localStorage.getItem('username');
   show_reg_students = false;
-
+  role = 0;
   onClick() {
     this.show_reg_students = !this.show_reg_students;
+  }
+  ngOnInit() {
+    if (localStorage.getItem('role')) {
+      this.role = parseInt(localStorage.getItem('role') || '', 10);
+    }
   }
 }

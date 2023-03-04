@@ -4,6 +4,7 @@ import {
   MAT_DIALOG_DATA,
   MatDialogRef,
 } from '@angular/material/dialog';
+import { CreateCourseSignalService } from './create-signal.service';
 
 export interface DialogData {
   animal: string;
@@ -38,10 +39,16 @@ export class CreateCourceComponent {
 export class CreateCourceDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<CreateCourceDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private createSignalService: CreateCourseSignalService
   ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  onCreate() {
+    this.createSignalService.SendCourseCreateSignal();
+    this.onNoClick();
   }
 }

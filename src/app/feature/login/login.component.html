@@ -1,10 +1,10 @@
 <div class="wrapper d-flex justify-content-center align-items-center mt-5">
   <div class="login">
     <p class="h4 mb-3">Log in</p>
-    <form class="d-flex flex-column">
+    <form class="d-flex flex-column" #myForm="ngForm">
       <mat-form-field appearance="fill">
         <mat-label>role</mat-label>
-        <mat-select [(ngModel)]="selectedValue" name="role">
+        <mat-select [(ngModel)]="role" name="role">
           <mat-option *ngFor="let role of roles" [value]="role.value">
             {{ role.viewValue }}
           </mat-option>
@@ -12,15 +12,29 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>username</mat-label>
-        <input type="text" matInput placeholder="Ex. John" />
+        <input
+          [(ngModel)]="username"
+          type="text"
+          name="username"
+          matInput
+          placeholder="Ex. John"
+        />
         <mat-error>Enter Username</mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>password</mat-label>
-        <input type="text" matInput placeholder="Ex. pat@example.com" />
+        <input
+          [(ngModel)]="password"
+          name="password"
+          type="password"
+          matInput
+          placeholder="password"
+        />
         <mat-error>Enter password</mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary">LOGIN</button>
+      <button mat-raised-button (click)="onClick()" color="primary">
+        LOGIN
+      </button>
     </form>
   </div>
 </div>

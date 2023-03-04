@@ -1,9 +1,19 @@
 <mat-toolbar class="d-flex justify-content-between" color="primary">
   <div class="left">
-    <p class="h5">Student Registration System</p>
+    <p class="h5">
+      <a routerLink="/" role="button" routerLinkActive="router-link-active"
+        >Student Registration System</a
+      >
+    </p>
   </div>
   <div class="right d-flex">
-    <app-reg-cource></app-reg-cource>
-    <button mat-raised-button class="me-5">Log Out</button>
+    <button
+      *ngIf="isLoggedIn"
+      mat-raised-button
+      class="me-5"
+      (click)="logOut()"
+    >
+      Log Out
+    </button>
   </div>
 </mat-toolbar>

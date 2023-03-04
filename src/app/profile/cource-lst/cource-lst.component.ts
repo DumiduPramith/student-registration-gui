@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SaveEventService } from 'src/app/feature/reg-cource/save-event.service';
 import { Course } from '../interface/course';
 import { GetCoursesService } from '../services/get-courses.service';
 
@@ -8,7 +9,15 @@ import { GetCoursesService } from '../services/get-courses.service';
   styleUrls: ['./cource-lst.component.scss'],
 })
 export class CourceLstComponent {
-  constructor(private courseService: GetCoursesService) {}
+  constructor(
+    private courseService: GetCoursesService,
+    private saveEvent: SaveEventService
+  ) {
+    this.saveEvent.selectCourseEvent.subscribe((data) => {
+      console.log('ran 1');
+      this.ngOnInit();
+    });
+  }
   courses: Course[] = [
     {
       course_id: '01',
@@ -18,9 +27,12 @@ export class CourceLstComponent {
     },
   ];
   ngOnInit() {
-    this.courseService.getData().subscribe((data) => {
-      this.courses = data.data;
-      console.log(this.courses);
-    });
+    setTimeout(() => {
+      const username = localStorage.getItem('username');
+      this.courseService.getData(username!).subscribe((data) => {
+        this.courses = data.data;
+        console.log(this.courses);
+      });
+    }, 1000);
   }
 }
