@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { CreateSignalService } from '../create-account/create-signal.service';
@@ -11,6 +12,7 @@ import { RegisterService } from '../services/register.service';
   styleUrls: ['./create-account-form.component.scss'],
 })
 export class CreateAccountFormComponent {
+  @ViewChild('myForm', { static: false }) myForm!: NgForm;
   selectedValue = '';
   username = '';
   password = '';

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CreateCourseSignalService } from '../create-cource/create-signal.service';
 import { CreateCourseService } from '../services/create-course.service';
@@ -9,6 +10,7 @@ import { CreateCourseService } from '../services/create-course.service';
   styleUrls: ['./create-cource-form.component.scss'],
 })
 export class CreateCourceFormComponent {
+  @ViewChild('myForm', { static: false }) myForm!: NgForm;
   constructor(
     private createSignalService: CreateCourseSignalService,
     private createCourseService: CreateCourseService,

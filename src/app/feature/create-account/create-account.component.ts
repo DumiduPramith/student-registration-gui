@@ -1,5 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CreateAccountFormComponent } from '../create-account-form/create-account-form.component';
 import { CreateSignalService } from './create-signal.service';
 
 @Component({
@@ -24,6 +25,7 @@ export class CreateAccountComponent {
   templateUrl: './create-account-dialog.html',
 })
 export class CreateAccountDialogComponent {
+  @ViewChild('child') childComponent!: CreateAccountFormComponent;
   constructor(
     public dialogRef: MatDialogRef<CreateAccountDialogComponent>,
     private createSignalSevice: CreateSignalService
@@ -34,7 +36,11 @@ export class CreateAccountDialogComponent {
   }
 
   onCreate() {
-    this.createSignalSevice.SendCreateSignal();
-    this.onNoClick();
+    if (this.childComponent.myForm.valid) {
+      this.createSignalSevice.SendCreateSignal();
+      this.onNoClick();
+    } else {
+      this.childComponent.myForm.control.markAllAsTouched();
+    }
   }
 }

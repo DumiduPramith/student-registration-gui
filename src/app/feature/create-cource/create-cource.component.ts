@@ -1,15 +1,7 @@
-import { Component, Inject } from '@angular/core';
-import {
-  MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { Component, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CreateCourceFormComponent } from '../create-cource-form/create-cource-form.component';
 import { CreateCourseSignalService } from './create-signal.service';
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
 
 @Component({
   selector: 'app-create-cource',
@@ -37,9 +29,9 @@ export class CreateCourceComponent {
   templateUrl: './create-cource-dialog.html',
 })
 export class CreateCourceDialogComponent {
+  @ViewChild('child') childComponent!: CreateCourceFormComponent;
   constructor(
     public dialogRef: MatDialogRef<CreateCourceDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private createSignalService: CreateCourseSignalService
   ) {}
 
@@ -48,7 +40,11 @@ export class CreateCourceDialogComponent {
   }
 
   onCreate() {
-    this.createSignalService.SendCourseCreateSignal();
-    this.onNoClick();
+    if (this.childComponent.myForm.valid) {
+      this.createSignalService.SendCourseCreateSignal();
+      this.onNoClick();
+    } else {
+      this.childComponent.myForm.control.markAllAsTouched();
+    }
   }
 }

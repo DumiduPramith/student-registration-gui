@@ -26,7 +26,7 @@ import { CreateAccountFormComponent } from './create-account-form/create-account
 import { CreateCourceFormComponent } from './create-cource-form/create-cource-form.component';
 import { ViewRegStudentsComponent } from './view-reg-students/view-reg-students.component';
 import { MatTableModule } from '@angular/material/table';
-import { SharedModule } from '../shared/shared.module';
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -53,7 +53,6 @@ import { SharedModule } from '../shared/shared.module';
     MatDialogModule,
     MatCheckboxModule,
     MatTableModule,
-    SharedModule,
   ],
   exports: [
     LoginComponent,

@@ -8,9 +8,24 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  {
+    path: '',
+    component: HomeComponent,
+    title: 'Home',
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    title: 'Login',
+    canActivate: [LoginGuard],
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    title: 'Profile',
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

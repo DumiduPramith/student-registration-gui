@@ -7,6 +7,7 @@
       type="text"
       matInput
       placeholder="Ex. ICT1407"
+      required
     />
     <mat-error>Enter cource code</mat-error>
   </mat-form-field>
@@ -18,6 +19,7 @@
       type="text"
       matInput
       placeholder="Ex. title"
+      required
     />
     <mat-error>Enter cource title</mat-error>
   </mat-form-field>
@@ -28,7 +30,8 @@
       [(ngModel)]="description"
       name="description"
       placeholder="Description"
+      required
     ></textarea>
+    <mat-error>Enter cource Description</mat-error>
   </mat-form-field>
-  <!-- <button mat-raised-button color="primary">LOGIN</button> -->
 </form>

@@ -10,6 +10,7 @@ import { ProfileModule } from './profile/profile.module';
 import { FeatureModule } from './feature/feature.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -21,6 +22,7 @@ import { HomeComponent } from './home/home.component';
     CoreModule,
     FeatureModule,
     ProfileModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
