@@ -17,7 +17,10 @@
     </div>
     <app-view-reg-students *ngIf="show_reg_students"></app-view-reg-students>
   </div>
-  <div *ngIf="role == 1" class="mt-4 d-flex flex-column justify-content-center">
+  <div
+    *ngIf="role == 1"
+    class="container mt-4 d-flex flex-column justify-content-center"
+  >
     <p class="h5">Your Cources</p>
 
     <app-cource-lst class="mt-3"></app-cource-lst>
